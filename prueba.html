@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #006400;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004d00;
+        }
+        #resultado {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            background-color: #eee;
+            padding: 10px;
+        }
+        /* Estilos para cada campo */
+        #cedula {
+            background-color: #e6f7ff; /* Azul claro */
+        }
+        #primer_nombre {
+            background-color: #fff3e6; /* Naranja claro */
+        }
+        #segundo_nombre {
+            background-color: #f0e6ff; /* Lila claro */
+        }
+        #primer_apellido {
+            background-color: #e6ffe6; /* Verde claro */
+        }
+        #segundo_apellido {
+            background-color: #fff4e6; /* Amarillo claro */
+        }
+        #correo {
+            background-color: #e6f9ff; /* Aqua claro */
+        }
+        #usuario {
+            background-color: #f9e6ff; /* Rosa claro */
+        }
+        #idrol {
+            background-color: #ffe6e6; /* Rojo claro */
+        }
+        #password {
+            background-color: #e6ffe6; /* Verde claro */
+        }
+    </style>
+</head>
+<body>
+    <h1>Creación de Usuarios</h1>
+    
+    <div class="form-group">
+        <label for="cedula">Cédula</label>
+        <input type="text" id="cedula" required>
+    </div>
+    <div class="form-group">
+        <label for="primer_nombre">Primer Nombre</label>
+        <input type="text" id="primer_nombre" required>
+    </div>
+    <div class="form-group">
+        <label for="segundo_nombre">Segundo Nombre</label>
+        <input type="text" id="segundo_nombre">
+    </div>
+    <div class="form-group">
+        <label for="primer_apellido">Primer Apellido</label>
+        <input type="text" id="primer_apellido" required>
+    </div>
+    <div class="form-group">
+        <label for="segundo_apellido">Segundo Apellido</label>
+        <input type="text" id="segundo_apellido">
+    </div>
+    <div class="form-group">
+        <label for="correo">Correo Electrónico</label>
+        <input type="email" id="correo" required>
+    </div>
+    <div class="form-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" required>
+    </div>
+    <div class="form-group">
+        <label for="idrol">ID Rol</label>
+        <select id="idrol" required>
+            <option value="1">GERENCIA GENERAL</option>
+            <option value="2">GERENCIA CORPORATIVA</option>
+            <option value="3">GERENCIA FINANCIERA</option>
+            <option value="4">GERENCIA DE OPERACIONES</option>
+            <option value="5">GERENCIA DE TALENTO HUMANO</option>
+            <option value="6">GERENCIA PLANEACION Y DESARROLLO</option>
+            <option value="7">GERENCIA REGIONAL</option>
+            <option value="8">LIDER SGI</option>
+            <option value="9">LIDER SST</option>
+            <option value="10">LIDER GAM</option>
+            <option value="11">LIDER COMERCIAL</option>
+            <option value="12">DIRECCION GTH NACIONAL</option>
+            <option value="13">LIDER BIENESTAR SOCIAL</option>
+            <option value="14">LIDER COMUNICACIONES</option>
+            <option value="15">LIDER JURIDICO</option>
+            <option value="16">LIDER TESORERIA Y PAGOS</option>
+            <option value="17">LIDER CONTABILIDAD</option>
+            <option value="18">CLIENTE - ADMINISTRADOR DEL CONTRATO</option>
+            <option value="19">CLIENTE - USUARIO VISUALIZACION - GERENTE</option>
+            <option value="20">CLIENTE SYADOC ADMIN</option>
+            <option value="21">CLIENTE - USUARIO SYADOC</option>
+            <option value="22">CLIENTE - USUARIO GESTION PEDIDOS</option>
+            <option value="23">CLIENTE - USUARIO OPERACIONES</option>
+            <option value="24">CLIENTE - FACTURACION</option>
+            <option value="25">CLIENTE - NOMINA</option>
+            <option value="26">CLIENTE - INTERVENTOR</option>
+            <option value="27">AUXILIAR ADMINISTRATIVO</option>
+            <option value="28">AUDITOR</option>
+            <option value="29">RECLUTADOR</option>
+            <option value="30">DIRECTOR(A) NYF Y SGS</option>
+            <option value="31">ASISTENTES OPERACIONES</option>
+            <option value="32">CLIENTE - USUARIO ADMINISTRADOR SYADOC-PO</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="tipo_usuario">Tipo de Usuario</label>
+        <select id="tipo_usuario" onchange="actualizarCampos()">
+            <option value="1">Plata</option>
+            <option value="2">Cliente</option>
+            <option value="3">Regional</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" disabled>
+    </div>
+
+    <div class="form-group">
+        <label>Usuario Creación</label>
+        <span>cvillamil</span>
+    </div>
+
+    <div class="form-group">
+        <label>Regionales</label>
+        <input type="checkbox" id="select_all" onclick="toggleRegionalCheckboxes()"> Seleccionar Todas
+        <div>
+            <input type="checkbox" class="regional" id="regional_cali"> CALI
+            <input type="checkbox" class="regional" id="regional_bogota"> BOGOTA
+            <input type="checkbox" class="regional" id="regional_pereira"> PEREIRA
+            <input type="checkbox" class="regional" id="regional_barranquilla"> BARRANQUILLA
+            <input type="checkbox" class="regional" id="regional_medellin"> MEDELLIN
+            <input type="checkbox" class="regional" id="regional_ibague"> IBAGUE
+            <input type="checkbox" class="regional" id="regional_bucaramanga"> BUCARAMANGA
+        </div>
+    </div>
+
+    <button onclick="generarSQL()">Generar Query SQL</button>
+    <button onclick="copiarQuery()">Copiar Query</button>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function actualizarCampos() {
+            const tipoUsuario = document.getElementById('tipo_usuario').value;
+            const passwordField = document.getElementById('password');
+            if (tipoUsuario == "2") {
+                passwordField.disabled = false;
+            } else {
+                passwordField.disabled = true;
+                passwordField.value = ''; // Limpiar el campo si se desactiva
+            }
+        }
+
+        function toggleRegionalCheckboxes() {
+            const selectAllCheckbox = document.getElementById('select_all');
+            const regionalCheckboxes = document.querySelectorAll('.regional');
+            regionalCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+
+        function generarSQL() {
+            const cedula = document.getElementById('cedula').value;
+            const primerNombre = document.getElementById('primer_nombre').value;
+            const segundoNombre = document.getElementById('segundo_nombre').value;
+            const primerApellido = document.getElementById('primer_apellido').value;
+            const segundoApellido = document.getElementById('segundo_apellido').value;
+            const correo = document.getElementById('correo').value;
+            const usuario = document.getElementById('usuario').value;
+            const idrol = document.getElementById('idrol').value;
+            const tipoUsuario = document.getElementById('tipo_usuario').value;
+            const password = tipoUsuario == "2" ? document.getElementById('password').value : cedula;
+
+            const regionalesSeleccionadas = [];
+            const regionalCheckboxes = document.querySelectorAll('.regional');
+            regionalCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    regionalesSeleccionadas.push(checkbox.id.replace('regional_', '').toUpperCase());
+                }
+            });
+
+            let query = `DO $$\nDECLARE\n    v_idusuario INTEGER;\nBEGIN\n    SELECT COALESCE(MAX(idusuarioprivado), 0) + 1 INTO v_idusuario FROM usuarios.usuarioprivado;\n\n    INSERT INTO usuarios.usuarioprivado \n        (idusuarioprivado, idtipousuario, numerodocumento, primernombre, segundonombre, primerapellido, segundoapellido, usuario, "password", email, habilitado, usuariocreacion, fechacreacion, contestapqrs) \n        VALUES (v_idusuario, ${tipoUsuario}, ${cedula}, '${primerNombre}', '${segundoNombre}', '${primerApellido}', '${segundoApellido}', '${usuario}', '${password}', '${correo}', true, 'cvillamil', current_timestamp, false);\n\n    INSERT INTO usuariosp\n        (codigousuario, nombresapellidos, dispositivoimp, codigosucursal, habilitado, nitcliente, iddepartamento, email)\n        VALUES ('${usuario}', '${primerNombre} ${segundoNombre} ${primerApellido} ${segundoApellido}', '', 1, TRUE, 0, 0, '${correo}');\n`;
+
+            regionalesSeleccionadas.forEach((nombre, index) => {
+                query += `    INSERT INTO usuarios.usuarioregionales \n        (idusuarioregional, idusuario, idregional, nombre, habilitado, usuariocreacion, fechacreacion)\n        VALUES ((SELECT MAX(idusuarioregional) + 1 FROM usuarios.usuarioregionales), v_idusuario, ${index + 1}, '${nombre}', true, 'cvillamil', current_timestamp);\n`;
+            });
+
+            query += `    INSERT INTO usuarios.usuariosrol \n        (idusuariorol, idusuario, idrol) \n        VALUES ((SELECT MAX(idusuariorol) + 1 FROM usuarios.usuariosrol), v_idusuario, ${idrol});\nEND $$;`;
+
+            document.getElementById('resultado').textContent = query;
+        }
+
+        function copiarQuery() {
+            const query = document.getElementById('resultado').textContent;
+            navigator.clipboard.writeText(query).then(() => {
+                alert('Query copiado al portapapeles!');
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
